@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDMI Digital Care Platform — ข้อเสนอโครงการ</title>
+<style>
+  :root {
+    --primary: #0d4f8b;
+    --accent: #c8102e;
+    --bg: #f7f9fc;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #5b6b7c;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Noto Sans Thai', 'Sarabun', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.75;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0a3a66 100%);
+    color: #fff; padding: 3rem 1.5rem 2.5rem;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; }
+  header h1 { font-size: 1.9rem; margin-bottom: .5rem; }
+  header p.sub { color: #ffffff; font-size: 1.05rem; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  .meta {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem;
+  }
+  .meta span {
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px; padding: .25rem .9rem; font-size: .9rem;
+  }
+  section { padding: 2.2rem 1.5rem; }
+  section:nth-child(even) { background: var(--card); }
+  h2 {
+    color: var(--primary); font-size: 1.4rem; margin-bottom: 1rem;
+    border-left: 5px solid var(--accent); padding-left: .8rem;
+  }
+  h3 { color: var(--primary); font-size: 1.1rem; margin: 1.2rem 0 .5rem; }
+  p, li { color: var(--text); }
+  .muted { color: var(--muted); }
+  ul { padding-left: 1.4rem; margin: .5rem 0; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.2rem 0; }
+  .stat {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.2rem; text-align: center;
+  }
+  .stat .num { font-size: 2rem; font-weight: 700; color: var(--accent); }
+  .stat .lbl { font-size: .9rem; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .95rem; }
+  th, td { border: 1px solid var(--border); padding: .6rem .8rem; text-align: left; vertical-align: top; }
+  th { background: #eef4fa; color: var(--primary); }
+  tr:nth-child(even) td { background: #fbfdff; }
+  .callout {
+    background: #fdf2f4; border: 1px solid #f3c7ce; border-left: 5px solid var(--accent);
+    border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0;
+  }
+  .total-row { font-weight: 700; background: #eef4fa !important; }
+  footer {
+    background: var(--primary); color: #fff; padding: 2rem 1.5rem; text-align: center; font-size: .9rem;
+  }
+  footer a { color: #cfe3f5; }
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.5rem; }
+    table { font-size: .85rem; }
+    th, td { padding: .45rem .5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>PDMI Digital Care Platform</h1>
+    <p class="sub">แอปพลิเคชันเว็บเพื่อการดูแลผู้ป่วย ACS หลังออกจากโรงพยาบาล ตาม PDMI Protocol ของประเทศไทย</p>
+    <div class="meta">
+      <span>เอกสารข้อเสนอโครงการ</span>
+      <span>จัดทำเพื่อเสนอ: Amgen (Thailand)</span>
+      <span>ผู้พัฒนา: นพ.อนุชิต วงศ์เพ็ญ — อายุรแพทย์โรคหัวใจ / Interventional Cardiologist โรงพยาบาลอุดรธานี</span>
+      <span>29 สิงหาคม 2569</span>
+      <span>สถานะ: ร่างเพื่อหารือ</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>1. บทสรุปผู้บริหาร</h2>
+    <p>ผู้ป่วยกลุ่มอาการหลอดเลือดหัวใจเฉียบพลัน (ACS) ในประเทศไทยเพียง <strong>25%</strong> ที่ทำ LDL-C ได้ต่ำกว่า 70 mg/dL ภายใน 4 เดือนหลังออกจากโรงพยาบาล (DYSIS II Thailand) ในทางกลับกัน หากควบคุม LDL-C ให้ต่ำกว่า 55 mg/dL ได้เร็วหลังเกิด ACS อัตราภาวะแทรกซ้อนหัวใจและหลอดเลือด (MACE) จะลดลงเหลือเพียง <strong>~3% เทียบกับ 11–12%</strong> ในการรักษาแบบเดิม</p>
+    <p>PDMI Protocol ซึ่งเป็นแนวทางฉันทามติระดับชาติสำหรับการดูแลผู้ป่วย ACS หลังออกจากโรงพยาบาล ได้กำหนดแนวทางการรักษาไว้แล้ว สิ่งที่ขาดคือ <strong>เครื่องมือที่ทำให้แนวทางนั้นถูกนำไปปฏิบัติจริง</strong> — ปัจจุบันใช้เช็กลิสต์กระดาษที่กรอกไม่สม่ำเสมอ ตรวจสอบย้อนหลังไม่ได้ และไม่ก่อให้เกิดข้อมูลผลลัพธ์</p>
+    <p>เราจึงเสนอพัฒนา <strong>เว็บแอปพลิเคชันที่รองรับมือถือ</strong> เพื่อแปลงเส้นทางการดูแลทั้งหมดจากการรับไว้ในโรงพยาบาลจนถึงการติดตามผล 1 ปี ให้เป็นระบบดิจิทัล ได้แก่ ทะเบียนผู้ป่วย เช็กลิสต์ก่อนและหลังออกจากโรงพยาบาล การติดตามเป้าหมาย LDL-C / ความดันโลหิต / HbA1c อัตโนมัติ และแดชบอร์ดผลลัพธ์แบบเรียลไทม์</p>
+    <div class="callout">
+      <strong>ข้อเสนอขอรับการสนับสนุนจาก Amgen:</strong> งบพัฒนาแอปพลิเคชัน นำร่อง และการดำเนินงานปีแรก (ดูหัวข้อ 7)
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>2. ปัญหา</h2>
+    <div class="stats">
+      <div class="stat"><div class="num">25%</div><div class="lbl">ผู้ป่วย ACS ไทยที่ทำ LDL-C &lt;70 mg/dL ได้ใน 4 เดือน</div></div>
+      <div class="stat"><div class="num">3% vs 12%</div><div class="lbl">MACE เมื่อคุม LDL-C &lt;55 mg/dL เร็ว เทียบกับการรักษาแบบเดิม</div></div>
+      <div class="stat"><div class="num">กระดาษ</div><div class="lbl">สื่อหลักที่ใช้ดำเนิน PDMI Protocol ในปัจจุบัน</div></div>
+    </div>
+    <h3>ช่องว่างเชิงคลินิก</h3>
+    <ul>
+      <li>อุปสรรคด้านผู้ป่วย: การเริ่มยาล่าช้า ความกังวลเรื่องผลข้างเคียง ความเข้าใจและภาระค่าใช้จ่าย</li>
+      <li>อุปสรรคด้านบุคลากร: เวลาจำกัด การปรับเพิ่มขนาดยา (dose titration) ไม่สม่ำเสมอ</li>
+      <li>อุปสรรคด้านระบบสุขภาพ: การเข้าถึงยาที่มีประสิทธิภาพยังจำกัด</li>
+    </ul>
+    <h3>ช่องว่างเชิงปฏิบัติการ</h3>
+    <ul>
+      <li>แนวทางระดับชาติมีอยู่แล้ว แต่การดำเนินการยังพึ่งเช็กลิสต์กระดาษ</li>
+      <li>ไม่มีการบันทึกอย่างเป็นระบบว่ารายการก่อนออกจากโรงพยาบาล 19 ข้อ และรายการติดตามบังคับ 10 ข้อ ถูกปฏิบัติครบหรือไม่</li>
+      <li>ไม่มีภาพรวมระดับกลุ่มผู้ป่วย ทำให้ช่องว่างการปรับยาไม่ถูกมองเห็นจนเกิดภาวะแทรกซ้อน</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>3. โซลูชัน</h2>
+    <table>
+      <tr><th>ความสามารถ</th><th>รายละเอียด</th></tr>
+      <tr><td>ทะเบียนผู้ป่วย</td><td>ข้อมูลแบบไม่ระบุตัวตน (ใช้รหัสสมมติเท่านั้น) สอดคล้อง PDPA โดยการออกแบบ</td></tr>
+      <tr><td>เช็กลิสต์ก่อนออกจากโรงพยาบาล</td><td>ครบทั้ง 19 รายการตามโปรโตคอล พร้อมสรุปเป้าหมาย LDL-C / ความดันโลหิต / HbA1c</td></tr>
+      <tr><td>การติดตามผลการรักษา</td><td>รายการบังคับและทางเลือกหลังออกจากโรงพยาบาล ผลแล็บ ค่าชีพจร การทบทวนยา</td></tr>
+      <tr><td>Goal Engine</td><td>ประเมินอัตโนมัติ: LDL-C &lt;55 mg/dL และลดลง ≥50% (หรือ &lt;40 สำหรับผู้ป่วย ACS ซ้ำ), เป้าความดันโลหิตตามช่วงอายุ, HbA1c &lt;7% พร้อมแจ้งเตือนนัดติดตาม</td></tr>
+      <tr><td>แดชบอร์ดผลลัพธ์</td><td>การบรรลุเป้าหมายระดับกลุ่มผู้ป่วย ผู้ป่วยที่ครบกำหนดติดตาม และแนวโน้มแบบเรียลไทม์</td></tr>
+      <tr><td>รองรับมือถือ</td><td>ใช้งานได้ที่หัวเตียงและห้องตรวจผ่านโทรศัพท์/แท็บเล็ต</td></tr>
+      <tr><td>ส่งออกข้อมูล</td><td>ไฟล์ CSV เพื่อการรายงานคุณภาพและผลลัพธ์</td></tr>
+    </table>
+
+    <h3>แผนการดำเนินงาน</h3>
+    <table>
+      <tr><th>ระยะ</th><th>ระยะเวลา</th><th>ผลลัพธ์ที่ส่งมอบ</th></tr>
+      <tr><td>1. พัฒนา</td><td>เดือน 1–3</td><td>แอปพลิเคชันพร้อมใช้ ผ่านการทดสอบ Goal Engine และข้อมูลสาธิต</td></tr>
+      <tr><td>2. นำร่อง</td><td>เดือน 4–9</td><td>ใช้งานจริง 1 โรงพยาบาล ผู้ป่วย 100–200 ราย ปรับกระบวนการร่วมกับทีมสหสาขาวิชาชีพ</td></tr>
+      <tr><td>3. ประเมินผล</td><td>เดือน 10–12</td><td>วิเคราะห์ผลตาม KPI รายงานและแผนการตีพิมพ์</td></tr>
+      <tr><td>4. ขยายผล (ทางเลือก)</td><td>ปีที่ 2+</td><td>ขยายหลายโรงพยาบาล (สถาปัตยกรรมรองรับแล้ว) ประเมินการเชื่อมต่อ EMR</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>4. ทีมงานและธรรมาภิบาล</h2>
+    <h3>ทีมคลินิก</h3>
+    <ul>
+      <li>แพทย์หัวใจหัวหน้าโครงการ, แพทย์ Fellows, พยาบาลผู้ประสานงานหัวใจ (Ward และ OPD), เภสัชกรคลินิก, นักกำหนดอาหาร/ทีมฟื้นฟู</li>
+    </ul>
+    <h3>ทีมเทคนิค</h3>
+    <ul>
+      <li>ผู้พัฒนาหลัก: <strong>นพ.อนุชิต วงศ์เพ็ญ</strong> อายุรแพทย์โรคหัวใจ / Interventional Cardiologist โรงพยาบาลอุดรธานี ซึ่งทั้งพัฒนาแอปพลิเคชันและเป็นผู้นำทางคลินิก ทำให้ซอฟต์แวร์ตรงกับขั้นตอนการทำงานจริงใน Ward และ OPD</li>
+      <li>ทีม IT/EMR ของโรงพยาบาลดูแลระบบภายในเครือข่ายโรงพยาบาล</li>
+    </ul>
+    <h3>คณะกรรมการกำกับ</h3>
+    <ul>
+      <li>หน่วยพัฒนาคุณภาพของโรงพยาบาลนำร่อง และคณะกรรมการกำกับทิศทาง (คลินิก + เทคนิค + ผู้แทนผู้สนับสนุน) ประชุมทุกไตรมาส</li>
+    </ul>
+
+    <h3>หลักความเป็นอิสระและการกำกับดูแล</h3>
+    <ul>
+      <li><strong>เป็นกลาง ไม่มีตราสินค้า:</strong> ไม่มีชื่อผลิตภัณฑ์หรือเนื้อหาส่งเสริมการขายใด ๆ ในแอป มีเพียงกลุ่มยาตามแนวทางฉันทามติระดับชาติ (เช่น "สแตตินความแรงสูง ± ยากลุ่ม non-statin")</li>
+      <li><strong>อิสระทางคลินิก:</strong> การตัดสินใจรักษาเป็นของแพทย์ผู้รักษาตามโปรโตคอลที่ตีพิมพ์แล้วทั้งสิ้น</li>
+      <li><strong>คุ้มครองข้อมูล:</strong> ออกแบบแบบไม่ระบุตัวตน เก็บในเครือข่ายโรงพยาบาล สอดคล้อง PDPA สำรองข้อมูลเข้ารหัสทุกวัน ผู้สนับสนุนได้รับรายงานสรุปที่ไม่สามารถระบุตัวบุคคลได้เท่านั้น</li>
+      <li><strong>โปร่งใส:</strong> ระบุการสนับสนุนในบทความและหน้า "About" ของแอป และรายงานผลไม่ว่าทิศทางจะเป็นอย่างไร</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>5. ตัวชี้วัดความสำเร็จ (KPIs)</h2>
+    <h3>ตัวชี้วัดหลัก</h3>
+    <ol>
+      <li>การบรรลุ LDL-C &lt;55 mg/dL ที่ 4–6 เดือนหลังออกจากโรงพยาบาล (เป้าหมาย &gt;50% ของผู้ป่วย เทียบฐาน 25% ที่เกณฑ์ &lt;70 mg/dL)</li>
+      <li>LDL-C ลดลงจากค่าเริ่มต้น ≥50% ที่ 4–6 เดือน</li>
+      <li>อัตราการกรอกเช็กลิสต์ครบถ้วน (เป้าหมาย &gt;90%)</li>
+    </ol>
+    <h3>ตัวชี้วัดรอง</h3>
+    <ul>
+      <li>ระยะเวลาจากวันออกจากโรงพยาบาลถึงการติดตามครั้งแรก ≤30 วัน</li>
+      <li>อัตราการปรับเพิ่มการรักษาลดไขมันภายใน 4–6 สัปดาห์เมื่อ LDL-C เกินเป้า</li>
+      <li>การบรรลุเป้าความดันโลหิตและ HbA1c; การปฏิบัติตามแผนการใช้ยา</li>
+      <li>ภาวะแทรกซ้อนหัวใจซ้ำและการรับไว้ในโรงพยาบาลภายใน 1 ปี (เชิงสำรวจ)</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>6. ความยั่งยืน</h2>
+    <ul>
+      <li>สถาปัตยกรรมเปิด (Next.js/Prisma) ทีม IT โรงพยาบาลดูแลต่อได้หลังส่งมอบ</li>
+      <li>รูปแบบผู้ฝึกผู้ฝึก (train-the-trainer): ทีมโรงพยาบาลนำร่องเป็นผู้ถ่ายทอดสู่แหล่งขยายผล</li>
+      <li>ต้นทุนการดำเนินงานต่ำ — มูลค่าจากงบคุณภาพของโรงพยาบาล ทุนสนับสนุนระยะถัดไป หรือกองทุนร่วมหลายแหล่ง</li>
+      <li>ทีมคลินิกเป็นเจ้าของโค้ดและเอกสารทั้งหมด ไม่ผูกขาดกับผู้ขายรายใด</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>7. การสนับสนุนที่ขอจาก Amgen</h2>
+    <table>
+      <tr><th>รายการ</th><th>ประมาณการ (บาท)</th><th>หมายเหตุ</th></tr>
+      <tr><td>การพัฒนา (ระยะ 1)</td><td>1,200,000</td><td>สร้างแอป ทดสอบ จัดทำเอกสาร</td></tr>
+      <tr><td>นำร่องและสนับสนุนหน้างาน (ระยะ 2)</td><td>600,000</td><td>ความเข้ากันได้อุปกรณ์ บูรณาการกระบวนการ อบรม</td></tr>
+      <tr><td>ประเมินผลและรายงาน (ระยะ 3)</td><td>300,000</td><td>วิเคราะห์สถิติ รายงาน ค่าตีพิมพ์</td></tr>
+      <tr><td>การดูแลระบบและโฮสติ้งปีที่ 1</td><td>150,000</td><td>เครื่องมือภายในองค์กร / คลาวด์ และการสำรองข้อมูล</td></tr>
+      <tr><td>บริหารโครงการและสำรองฉุกเฉิน (~10%)</td><td>250,000</td><td></td></tr>
+      <tr class="total-row"><td>รวม (12 เดือน)</td><td>2,500,000</td><td>เป็นตัวเลขเบื้องต้น จัดทำงบละเอียดเพิ่มเติมเมื่อร้องขอ</td></tr>
+    </table>
+    <p class="muted">ยินดีรับการสนับสนุนที่ไม่ใช่งบประมาณเช่นกัน: ความเชี่ยวชาญด้านการบริหารโครงการ และการเชื่อมโยงเครือข่ายความร่วมมือ QPI ระดับนานาชาติ</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>8. ความเสี่ยงและการบริหารความเสี่ยง</h2>
+    <table>
+      <tr><th>ความเสี่ยง</th><th>แนวทางลดความเสี่ยง</th></tr>
+      <tr><td>บุคลากรไม่นำไปใช้</td><td>ออกแบบ mobile-first กรอกเช็กลิสต์จบใน ≤2 นาที มอบหมายให้พยาบาลผู้ประสานงานเป็นเจ้าของ และร่วมออกแบบขั้นตอนในระยะนำร่อง</td></tr>
+      <tr><td>ความกังวลเรื่องความเป็นส่วนตัวของข้อมูล</td><td>ไม่ระบุตัวตน เก็บในเครือข่ายโรงพยาบาล ทบทวน PDPA ก่อนเปิดใช้จริง</td></tr>
+      <tr><td>ข้อจำกัดหลักฐานจากแหล่งเดียว</td><td>กำหนดระยะนำร่องเป็นการศึกษาความเป็นไปได้ สถาปัตยกรรมพร้อมขยายหลายแหล่งในระยะ 4</td></tr>
+      <tr><td>การมองเห็นความเป็นอิสระจากผู้สนับสนุน</td><td>ออกแบบปลอดตราสินค้า ใช้โปรโตคอลที่ตีพิมพ์แล้วเป็นฐานคลินิกเดียว ระบุการสนับสนุนอย่างโปร่งใส</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>9. เอกสารอ้างอิง</h2>
+    <ol>
+      <li>Buddhari W, et al. LDL-C target attainment in ACS patients in Thailand: DYSIS II. <em>Heart Lung Circ</em>. 2020;29(3):405-413.</li>
+      <li>Smith J, et al. Personalised, strike-early-and-strong lipid lowering in AMI. <em>Eur Heart J Cardiovasc Pharmacother</em>. 2025;11:43-154.</li>
+      <li>Kittiyaphong R, et al. Post-ACS discharge and long-term follow-up: recommendations for Thailand. <em>J Asian Pac Soc Cardiol</em>. 2025;4:e05.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>PDMI Digital Care Platform — ข้อเสนอโครงการ (ร่าง)</p>
+    <p class="muted" style="color:#cfe3f5">จัดทำเพื่อเสนอ Amgen (Thailand) · 29 สิงหาคม 2569</p>
+  </div>
+</footer>
+
+</body>
+</html>
