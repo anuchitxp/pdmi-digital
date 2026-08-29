@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Hospital {
+  id       String   @id @default(cuid())
+  code     String   @unique // e.g. "H01"
+  name     String
+  patients Patient[]
+  createdAt DateTime @default(now())
+}
+
+model Patient {
+  id             String   @id @default(cuid())
+  hospitalId     String
+  hospital       Hospital @relation(fields: [hospitalId], references: [id])
+  codedId        String // pseudonymised, namespaced per hospital e.g. "H01-P-0142"
+  age            Int
+  sex            String // "male" | "female"
+  acsType        String // "STEMI" | "NSTEMI" | "UA"
+  pci            Boolean  @default(false)
+  recurrentEvents Int    @default(1) // number of ACS events including current
+  baselineLdlc   Float?
+  hasDiabetes    Boolean  @default(false)
+  lvef           Float?
+  admissionDate  DateTime
+  dischargeDate  DateTime?
+  nextVisitDate  DateTime?
+  deletedAt      DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([hospitalId, codedId])
+  preDischargeChecklist PreDischargeChecklist?
+  visits                Visit[]
+}
+
+model PreDischargeChecklist {
+  id          String    @id @default(cuid())
+  patientId   String    @unique
+  patient     Patient   @relation(fields: [patientId], references: [id])
+  items       String    @default("[]") // JSON: [{itemNo, status ("yes"|"no"|"na"|"pending"), notes}]
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime?
+}
+
+model Visit {
+  id          String   @id @default(cuid())
+  patientId   String
+  patient     Patient  @relation(fields: [patientId], references: [id])
+  visitDate   DateTime
+  visitType   String // "first-30-day" | "3-6-month" | "1-year" | "telephone"
+  checklist   PostDischargeChecklist?
+  labResults  LabResult[]
+  vitals      Vitals[]
+  medications MedicationRegimen[]
+  nextVisitDate DateTime?
+  deletedAt   DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PostDischargeChecklist {
+  id         String   @id @default(cuid())
+  visitId    String   @unique
+  visit      Visit    @relation(fields: [visitId], references: [id])
+  items      String   @default("[]") // JSON: [{part, itemNo, status, notes}]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  deletedAt  DateTime?
+}
+
+model LabResult {
+  id       String  @id @default(cuid())
+  visitId  String
+  visit    Visit   @relation(fields: [visitId], references: [id])
+  ldlc     Float? // mg/dL
+  hba1c    Float? // %
+  ldlcPercentReduction Float? // auto-computed from patient baseline
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+}
+
+model Vitals {
+  id         String   @id @default(cuid())
+  visitId    String
+  visit      Visit    @relation(fields: [visitId], references: [id])
+  systolic   Int? // mmHg
+  diastolic  Int? // mmHg
+  heartRate  Int?
+  createdAt  DateTime @default(now())
+  deletedAt  DateTime?
+}
+
+model MedicationRegimen {
+  id              String   @id @default(cuid())
+  visitId         String
+  visit           Visit    @relation(fields: [visitId], references: [id])
+  aspirin         Boolean  @default(false)
+  p2y12           String?  // drug name or null
+  statinIntensity String?  // "high" | "moderate" | "low" | null
+  nonStatin       String?  // ezetimibe / bempedoic acid / PCSK9i name or null
+  aceiOrArb       String?  // drug name or null
+  betaBlocker     String?  // drug name or null
+  mra             String?  // drug name or null
+  antihypertensives String? // free-text classes
+  sglt2i          Boolean  @default(false)
+  glp1ra          Boolean  @default(false)
+  otherDiabetes   String?
+  createdAt       DateTime @default(now())
+  deletedAt       DateTime?
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  entityType String // "Patient" | "PreDischargeChecklist" | "Visit" | ...
+  entityId   String
+  action     String // "create" | "update" | "soft-delete"
+  actor      String // free-text actor label, e.g. "ward-nurse"
+  createdAt  DateTime @default(now())
+}
