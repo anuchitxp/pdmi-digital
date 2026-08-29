@@ -8,10 +8,11 @@ export const dynamic = "force-dynamic";
 export default async function PatientsPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
+  const { q: query } = await searchParams;
   const all = await listPatients();
-  const q = (searchParams.q ?? "").trim().toLowerCase();
+  const q = (query ?? "").trim().toLowerCase();
   const patients = q
     ? all.filter((p) => p.codedId.toLowerCase().includes(q))
     : all;
@@ -40,7 +41,7 @@ export default async function PatientsPage({
         <input
           type="text"
           name="q"
-          defaultValue={searchParams.q ?? ""}
+          defaultValue={query ?? ""}
           placeholder="Search by coded ID…"
           className="max-w-xs"
         />

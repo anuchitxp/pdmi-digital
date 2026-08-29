@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useState } from "react";
 import { createVisit } from "@/app/actions";
 import {
   POST_DISCHARGE_MANDATORY_ITEMS,
@@ -34,11 +33,10 @@ export default function VisitForm({
   defaultVisitDate: string;
   defaultNextVisitDate: string;
 }) {
-  const [state, action] = useFormState<State, FormData>(
+  const [state, action, pending] = useActionState<State, FormData>(
     async (prev, fd) => (await createVisit(fd)) ?? undefined,
     undefined,
   );
-  const pending = false;
   const errors = state?.errors ?? {};
 
   const [mandatory, setMandatory] = useState<ChecklistItemState[]>(init(POST_DISCHARGE_MANDATORY_ITEMS));

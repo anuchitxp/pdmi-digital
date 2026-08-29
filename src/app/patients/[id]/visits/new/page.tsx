@@ -6,8 +6,13 @@ import { toDateInputValue } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 
-export default async function NewVisitPage({ params }: { params: { id: string } }) {
-  const patient = await getPatient(params.id);
+export default async function NewVisitPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
   const today = toDateInputValue(new Date());

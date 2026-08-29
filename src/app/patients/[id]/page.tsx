@@ -12,9 +12,10 @@ export const dynamic = "force-dynamic";
 export default async function PatientDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const patient = await getPatient(params.id);
+  const { id } = await params;
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
   const goals = goalsForPatient(patient);

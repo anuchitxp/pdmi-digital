@@ -1,16 +1,15 @@
 "use client";
 
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { createPatient } from "@/app/actions";
 
 type State = { errors: Record<string, string> } | undefined;
 
 export default function PatientForm() {
-  const [state, action] = useFormState<State, FormData>(
+  const [state, action, pending] = useActionState<State, FormData>(
     async (prev, fd) => (await createPatient(fd)) ?? undefined,
     undefined,
   );
-  const pending = false;
   const errors = state?.errors ?? {};
 
   return (

@@ -17,8 +17,13 @@ function statusLabel(s: string | undefined) {
   return "—";
 }
 
-export default async function PrintPage({ params }: { params: { id: string } }) {
-  const patient = await getPatient(params.id);
+export default async function PrintPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
   const ldl = evaluateLdlGoal({

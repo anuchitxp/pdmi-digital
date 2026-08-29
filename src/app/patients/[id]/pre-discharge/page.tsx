@@ -8,9 +8,10 @@ export const dynamic = "force-dynamic";
 export default async function PreDischargePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const patient = await getPatient(params.id);
+  const { id } = await params;
+  const patient = await getPatient(id);
   if (!patient) notFound();
 
   const items = parseChecklistItems(patient.preDischargeChecklist?.items);
