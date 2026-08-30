@@ -74,7 +74,20 @@ dashboard.
 
 ## Architecture
 
-Next.js 14 (App Router) + TypeScript + Tailwind CSS, Prisma + SQLite.
+Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS, Prisma + SQLite.
 All clinical goal logic lives in `src/lib/goals` (never inlined in components);
 all clinical thresholds come from `pdmi-context.md`. Timestamps are stored UTC
-and displayed in Asia/Bangkok via the single helper in `src/lib/format.ts`.
+and displayed in Asia/Bangkok (yyyy-MM-dd) via the single helper in
+`src/lib/format.ts`.
+
+## Deployment
+
+See `DEPLOY.md` for the AlmaLinux 9 (Vultr) deployment runbook — including
+firewall rules, pm2 setup, and the PDPA/no-auth precautions for public-IP
+testing.
+
+## Security
+
+`npm audit` is clean. Note: `package.json` pins an override on
+`deepmerge-ts@^8.0.2` to keep the Prisma 6 CLI free of known advisories;
+when upgrading to Prisma 7+, try removing the override.

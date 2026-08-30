@@ -22,7 +22,10 @@ sudo dnf install -y nodejs
 ```bash
 git clone <your-repo-url> && cd pdmi-digital
 npm ci
-npx prisma migrate dev      # creates SQLite DB + seeds fake demo patients
+# On the server always use `migrate deploy` (never `migrate dev` — that can
+# create/reset migrations and is for local development only).
+npx prisma migrate deploy
+npx prisma db seed          # seeds the fake demo patients (first install only)
 npm run build
 ```
 
@@ -73,11 +76,17 @@ Restore instructions are in the README ("Backup & restore").
 
 ## Updating
 
+One command on the server:
+
 ```bash
 cd ~/pdmi-digital
-git pull
-npm ci
-npx prisma migrate dev
-npm run build
-pm2 restart pdmi
+chmod +x scripts/update.sh   # first time only
+./scripts/update.sh
 ```
+
+The script backs up the DB first, then runs
+`git pull --ff-only` → `npm ci` → `npm test` → `npx prisma migrate deploy` →
+`npm run build` → `pm2 restart pdmi`. It stops at the first failing step, and
+the app keeps serving the previous build until every step has passed — so a
+failed test or build never takes the app down. Backups go to `./backups`
+(or set `PDMI_BACKUP_DIR`).

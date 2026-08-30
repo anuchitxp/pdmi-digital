@@ -15,9 +15,15 @@ Track finished work here. Move items from `plan.md` as they are completed.
 - [x] Print view (patient care record) + CSV export (`/api/export`) + PWA web manifest
 - [x] Backup script (`scripts/backup-db.sh`) + README with setup/restore instructions
 - [x] Verified: `npm test` (38 passing), `npm run build`, smoke test of all routes
+- [x] Date display format changed to yyyy-MM-dd (single helper `src/lib/format.ts`)
+- [x] Security upgrade: Next.js 14.2.21 → 16.3.3, React 19, recharts 3, vitest 4 — clears all runtime advisories (async `params`/`searchParams`, `useActionState`)
+- [x] `deepmerge-ts@^8` override for Prisma 6 CLI — `npm audit` now reports 0 vulnerabilities
+- [x] `DEPLOY.md` — AlmaLinux 9 / Vultr deployment runbook (Node 22, pm2, firewalld + Vultr firewall, backup cron)
 
 ## Known limitations / next steps
 
 - [ ] No login/auth in v1 (per plan); audit actor is a free-text field
 - [ ] Pre-discharge checklist completion does not gate discharge state machine
 - [ ] Dashboard trend charts are per-patient only; cohort trends not yet built
+- [ ] Prisma 7 CLI migration (would let the deepmerge-ts override be dropped)
+- [ ] Local dev DB now holds real (pseudonymised) patients — keep Vultr test instance on fake seed data only
