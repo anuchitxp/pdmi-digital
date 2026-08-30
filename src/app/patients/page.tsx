@@ -2,6 +2,7 @@ import Link from "next/link";
 import { listPatients, goalsForPatient } from "@/lib/queries";
 import { formatDate } from "@/lib/format";
 import StatusBadge from "@/components/StatusBadge";
+import Card from "@/components/Card";
 
 export const dynamic = "force-dynamic";
 
@@ -50,7 +51,7 @@ export default async function PatientsPage({
         </button>
       </form>
 
-      <div className="overflow-x-auto rounded-xl bg-white shadow">
+      <Card className="!p-0 overflow-x-auto">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead className="border-b border-slate-200 text-xs uppercase text-slate-500">
             <tr>
@@ -96,7 +97,7 @@ export default async function PatientsPage({
             )}
           </tbody>
         </table>
-      </div>
+      </Card>
     </div>
   );
 }

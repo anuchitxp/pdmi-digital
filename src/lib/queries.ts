@@ -1,5 +1,6 @@
 import { prisma } from "./db";
 import { isFollowUpOverdue } from "./goals";
+import { monthlyAtGoalTrend, monthKey } from "./trends";
 import type { GoalStatus } from "./goals/types";
 import type { ChecklistItemState } from "./checklists";
 
@@ -84,11 +85,53 @@ export async function getDashboardData() {
     })
     .map((p) => ({ id: p.id, codedId: p.codedId, nextVisitDate: p.nextVisitDate }));
 
+  // Monthly at-goal trend rows: evaluate the goal engine per visit so the
+  // thresholds themselves stay in src/lib/goals.
+  const ldlRows: { month: string; status: GoalStatus }[] = [];
+  const bpRows: { month: string; status: GoalStatus }[] = [];
+  const hba1cRows: { month: string; status: GoalStatus }[] = [];
+  for (const p of patients) {
+    for (const visit of p.visits) {
+      const month = monthKey(visit.visitDate);
+      const lab = visit.labResults.find((l) => l.ldlc != null) ?? null;
+      const labHba1c = visit.labResults.find((l) => l.hba1c != null) ?? null;
+      const vit = visit.vitals.find((v) => v.systolic != null) ?? null;
+      ldlRows.push({
+        month,
+        status: evaluateLdlGoal({
+          ldlc: lab?.ldlc ?? null,
+          baselineLdlc: p.baselineLdlc,
+          recurrentEvents: p.recurrentEvents,
+        }).achieved,
+      });
+      bpRows.push({
+        month,
+        status: evaluateBpGoal({
+          age: p.age,
+          systolic: vit?.systolic ?? null,
+          diastolic: vit?.diastolic ?? null,
+        }).achieved,
+      });
+      hba1cRows.push({
+        month,
+        status: evaluateHba1cGoal({
+          hasDiabetes: p.hasDiabetes,
+          hba1c: labHba1c?.hba1c ?? null,
+        }).achieved,
+      });
+    }
+  }
+
   return {
     totalPatients: patients.length,
     ldl: { atGoal: ldlAtGoal, measured: ldlMeasured },
     bp: { atGoal: bpAtGoal, measured: bpMeasured },
     hba1c: { atGoal: hba1cAtGoal, measured: hba1cMeasured },
+    trends: {
+      ldl: monthlyAtGoalTrend(ldlRows, today),
+      bp: monthlyAtGoalTrend(bpRows, today),
+      hba1c: monthlyAtGoalTrend(hba1cRows, today),
+    },
     overdue,
   };
 }

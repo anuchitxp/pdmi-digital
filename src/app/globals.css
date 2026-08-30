@@ -7,7 +7,35 @@
 }
 
 body {
-  @apply bg-slate-100 text-slate-900 antialiased;
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Card entrance + hover micro-interactions (touch devices keep static) */
+@keyframes card-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-enter {
+  animation: card-fade-in 0.3s ease-out both;
+}
+
+@media (hover: hover) {
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  }
+}
+
+/* Big stat numbers: slightly tightened tracking, aligned digits */
+.stat-value {
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Touch-friendly form controls throughout */

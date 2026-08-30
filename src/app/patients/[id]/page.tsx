@@ -5,6 +5,7 @@ import { evaluateBpGoal, evaluateLdlGoal } from "@/lib/goals";
 import { formatDate } from "@/lib/format";
 import StatusBadge from "@/components/StatusBadge";
 import LdlTrendChart from "@/components/LdlTrendChart";
+import Card from "@/components/Card";
 import { softDeletePatient, softDeleteVisit } from "@/app/actions";
 
 export const dynamic = "force-dynamic";
@@ -81,7 +82,7 @@ export default async function PatientDetailPage({
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <div className="rounded-xl bg-white p-5 shadow">
+        <Card>
           <h3 className="text-sm font-semibold text-slate-500">LDL-C goal</h3>
           <div className="mt-2"><StatusBadge status={goals.ldl} /></div>
           <p className="mt-2 text-sm text-slate-600">
@@ -94,8 +95,8 @@ export default async function PatientDetailPage({
               {ldl.percentReduction !== null ? ` (${ldl.percentReduction}% reduction)` : ""}
             </p>
           )}
-        </div>
-        <div className="rounded-xl bg-white p-5 shadow">
+        </Card>
+        <Card>
           <h3 className="text-sm font-semibold text-slate-500">BP goal</h3>
           <div className="mt-2"><StatusBadge status={goals.bp} /></div>
           <p className="mt-2 text-sm text-slate-600">
@@ -106,23 +107,23 @@ export default async function PatientDetailPage({
           {bp.systolic !== null && bp.diastolic !== null && (
             <p className="mt-1 text-sm">Latest: {bp.systolic}/{bp.diastolic} mmHg</p>
           )}
-        </div>
-        <div className="rounded-xl bg-white p-5 shadow">
+        </Card>
+        <Card>
           <h3 className="text-sm font-semibold text-slate-500">HbA1c goal</h3>
           <div className="mt-2"><StatusBadge status={goals.hba1c} /></div>
           <p className="mt-2 text-sm text-slate-600">
             {patient.hasDiabetes ? "Target <7% (individualised)" : "Non-diabetic — not applicable"}
           </p>
-        </div>
+        </Card>
       </div>
 
-      <div className="rounded-xl bg-white p-5 shadow">
+      <Card>
         <h2 className="mb-3 font-semibold">LDL-C trend</h2>
         <LdlTrendChart data={trend} target={ldl.targetMgDl} />
-      </div>
+      </Card>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-xl bg-white p-5 shadow">
+        <Card>
           <h2 className="mb-3 font-semibold">Key dates</h2>
           <dl className="space-y-1 text-sm">
             <div className="flex justify-between"><dt className="text-slate-500">Admission</dt><dd>{formatDate(patient.admissionDate)}</dd></div>
@@ -133,9 +134,9 @@ export default async function PatientDetailPage({
               <dd>{preItems.length > 0 ? `${preAnswered}/${preItems.length} answered` : "not started"}</dd>
             </div>
           </dl>
-        </div>
+        </Card>
 
-        <div className="rounded-xl bg-white p-5 shadow">
+        <Card>
           <h2 className="mb-3 font-semibold">Audit</h2>
           <form action={softDeletePatient} className="no-print">
             <input type="hidden" name="patientId" value={patient.id} />
@@ -149,10 +150,10 @@ export default async function PatientDetailPage({
           <p className="mt-2 text-xs text-slate-500">
             Records are never hard-deleted — QI data is preserved.
           </p>
-        </div>
+        </Card>
       </div>
 
-      <div className="rounded-xl bg-white p-5 shadow">
+      <Card>
         <h2 className="mb-3 font-semibold">Visit timeline</h2>
         {patient.visits.length === 0 ? (
           <p className="text-sm text-slate-500">No visits recorded yet.</p>
@@ -195,7 +196,7 @@ export default async function PatientDetailPage({
             })}
           </ul>
         )}
-      </div>
+      </Card>
     </div>
   );
 }
