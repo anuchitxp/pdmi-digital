@@ -27,6 +27,15 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
+# Load DATABASE_URL etc. so backup-db.sh and Prisma see the server's .env
+# (non-interactive shells don't read it automatically).
+if [ -f .env ]; then
+  set -a
+  # shellcheck disable=SC1091
+  . ./.env
+  set +a
+fi
+
 OLD_SHA="$(git rev-parse --short HEAD)"
 echo "==> Current commit: $OLD_SHA"
 
