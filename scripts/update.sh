@@ -21,7 +21,10 @@ pm2 describe pdmi >/dev/null 2>&1 || {
   exit 1
 }
 
-if [ -n "$(git status --porcelain)" ]; then
+# Only tracked modifications block the pull; untracked files (DB, backups)
+# live on the server normally, and git itself refuses a pull that would
+# overwrite an untracked file.
+if ! git diff --quiet HEAD; then
   echo "Working tree is dirty — local changes on the server would be overwritten." >&2
   echo "Commit/stash them, or 'git checkout -- .' if they are accidental, then retry." >&2
   exit 1
